@@ -37,12 +37,14 @@ if(!isset($_POST["submitted"])){
   $email=$existuser->email;
   $password=$existuser->password;
   $cpassword=$password;
+  $subState=$existuser->subscribe;
 }else{
   $firstName=$_POST["firstName"];
   $lastName=$_POST["lastName"];
   $email=$_POST["email"];
   $password=$_POST["password"];
   $cpassword=$_POST["cpassword"];
+  $subState=$_POST["subCheckbox"];
 
   if($firstName!='' && $lastName!='' && $email!='' && $password!='' && $cpassword == $password){
       if ($validate->check_name($firstName, $error_fname) && $validate->check_name($lastName, $error_lname)) {
@@ -64,6 +66,7 @@ if(!isset($_POST["submitted"])){
                       $existuser->email=$email;
                       $existuser->password=password_hash($password, PASSWORD_BCRYPT);
                       $existuser->id=$UM->getIdByEmail($_SESSION["email"]);
+                      $existuser->subscribe=$subState;
                       $UM->updateUser($existuser);
                       $_SESSION["email"]=$email;
                       header("Location:../../home.php");
@@ -108,7 +111,10 @@ if(!isset($_POST["submitted"])){
   </tr>
   <tr>
     <td>Subscription</td>
-    <td><input type="checkbox" name="subCheckbox" value="1" size="20"></td>
+    <td>
+      <input type="hidden" name="subCheckbox" value="0">
+      <input type="checkbox" name="subCheckbox" value="1" size="20" <?php echo ($subState==1 ? 'checked' : ''); ?>>
+    </td>
   </tr>
   <tr>
 	<td></td>

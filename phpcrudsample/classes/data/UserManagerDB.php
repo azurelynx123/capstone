@@ -71,9 +71,9 @@ class UserManagerDB
     }
     public static function saveUser(User $user){
         $conn=DBUtil::getConnection();
-        $sql="INSERT INTO tb_user (id, firstname, lastname, email, password, account_creation_time, role) VALUES (?,?,?,?,?,?,?)";
+        $sql="INSERT INTO tb_user (id, firstname, lastname, email, password, account_creation_time, role, subscription) VALUES (?,?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issssss", $user->id,$user->firstName, $user->lastName, $user->email,$user->password, $user->account_creation_time, $user->role);
+        $stmt->bind_param("issssssi", $user->id,$user->firstName, $user->lastName, $user->email,$user->password, $user->account_creation_time, $user->role, $user->subscribe);
         $stmt->execute();
         if($stmt->errno!=0){
             printf("Error: %s.\n",$stmt->error);
@@ -199,9 +199,9 @@ class UserManagerDB
     
     public static function updateUser(User $user){
         $conn=DBUtil::getConnection();
-        $sql="UPDATE tb_user SET firstname = ?, lastname = ?, email = ?, password = ? WHERE id = ?";
+        $sql="UPDATE tb_user SET firstname = ?, lastname = ?, email = ?, password = ?, subscription = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssi", $user->firstName, $user->lastName, $user->email,$user->password, $user->id);
+        $stmt->bind_param("ssssii", $user->firstName, $user->lastName, $user->email,$user->password, $user->subscribe, $user->id);
         $stmt->execute();
         if($stmt->errno!=0){
             printf("Error: %s.\n",$stmt->error);

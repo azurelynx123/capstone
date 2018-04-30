@@ -40,7 +40,8 @@ if (isset($_REQUEST["submitted"])) {
                     $user->lastName = $lastName;
                     $user->email = $email;
                     $user->password = password_hash($password, PASSWORD_BCRYPT);
-                    $user->role = "user";
+					$user->role = "user";
+					$user->subscribe = 1;
                     $existuser = $UM->getUserByEmail($email);
                     
                     if (! isset($existuser)) {

@@ -35,7 +35,9 @@ if(isset($users)){
     <table class="pure-table pure-table-bordered" width="800">
     <tr>
 	<thead>
+    <?php if($_SESSION['role'] == "admin"){ ?>
         <th></th>
+    <?php } ?>
     	<th><b>Id</b></th>
     	<th><b>First Name</b></th>
     	<th><b>Last Name</b></th>
@@ -46,7 +48,7 @@ if(isset($users)){
 		<?php } ?>
 	</thead>
     </tr>
-    <form method="post" class="pure-form pure-form-stacked">    
+        
     <?php 
     foreach ($users as $user) {
         if($user!=null){
@@ -55,10 +57,13 @@ if(isset($users)){
             }
             ?>
             <tr>
+            <?php if($_SESSION['role'] == "admin"){ ?>
+                <form method="post" class="pure-form pure-form-stacked">
             <?php if($user->subscribe != false) {  ?>
                     <td align="center" bgcolor="#FFFFFF"><input name="check[]" type="checkbox" value="<?php echo $user->id; ?>"></td>
             <?php } else { ?>
                     <td></td>
+            <?php } ?>
             <?php } ?>
                <td><?=$user->id?></td>
                <td><?=$user->firstName?></td>
@@ -74,9 +79,13 @@ if(isset($users)){
     }
     ?>
     </table><br/>
-    <input type="submit" value="Email Checked Personnel" name ="bulkMail" class="pure-button pure-button-primary"/>
-    </form>
-    <br/><br/>
+    
+    <?php if($_SESSION['role'] == "admin"){ ?>
+        <input type="submit" value="Email Checked Personnel" name ="bulkMail" class="pure-button pure-button-primary"/>
+        </form>
+        <br/><br/>
+    <?php } ?>
+
     <?php
     if(isset($_POST["bulkMail"])){
         $checkedArray = $_POST["check"];
