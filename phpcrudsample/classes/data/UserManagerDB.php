@@ -209,6 +209,21 @@ class UserManagerDB
         $stmt->close();
         $conn->close();
     }
+
+    public static function unsubscribe($id){
+        $unsubParam = 0;
+
+        $conn=DBUtil::getConnection();
+        $sql="UPDATE tb_user SET subscription = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $unsubParam, $id);
+        $stmt->execute();
+        if($stmt->errno!=0){
+            printf("Error: %s.\n",$stmt->error);
+        }
+        $stmt->close();
+        $conn->close();
+    }
 }
 
 ?>

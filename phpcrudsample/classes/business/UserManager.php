@@ -91,6 +91,10 @@ class UserManager
 	public function updateUser(User $user){
 	    return UserManagerDB::updateUser($user);
 	}
+
+	public static function unsubscribe($id){
+		return UserManagerDB::unsubscribe($id);
+	}
 }
 
 ?>
