@@ -10,7 +10,19 @@ ob_start();
 include '../../includes/security.php';
 include '../../includes/header.php';
 ?>
-<br/>
+<head>
+    <title>Update Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../bs/css/bootstrap.min.css">
+    <script src="../../bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="min-height: 100vh; background-image: url(../../images/background.jpg); background-repeat: repeat; background-size : 100% auto; background-attachment: fixed">
+<br>
+<div class="container-fluid" style="background-color: rgba(255, 255, 255, 0.8); width: max-content;">
+<br>
 <link rel="stylesheet" href="..\..\css\pure-release-1.0.0\pure-min.css">
 <title>Search results</title>
 <form action="searchUser.php" method="get" class="pure-form pure-form-stacked">
@@ -32,6 +44,7 @@ if(strlen($query)!=0){
 
 if (isset($users) && $users!=FALSE) {
 ?>
+		
 		<br/>
 		Below is the list of Developers registered in community portal
 		<br/>
@@ -68,6 +81,7 @@ if (isset($users) && $users!=FALSE) {
     }
     ?>
     </table>
+	</div>
     <?php 
 } else {
     if (strlen($query)!=0){

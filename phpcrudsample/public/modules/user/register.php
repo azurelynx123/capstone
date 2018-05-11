@@ -62,43 +62,62 @@ if (isset($_REQUEST["submitted"])) {
     }
 }
 ?>
-<link rel="stylesheet" href="..\..\css\pure-release-1.0.0\pure-min.css">
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="..\..\css\pure-release-1.0.0\pure-min.css">
+    <link rel="stylesheet" href="../../bs/css/bootstrap.min.css">
+    <script src="../../bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="min-height: 100vh; background-image: url(../../images/background.jpg); background-repeat: repeat; background-size : 100% auto; background-attachment: fixed">
+<br>
+
+<div class="col-lg-4 col-lg-offset-4" style="background-color: rgba(255, 255, 255, 0.8)">
+<div class="container-fluid" style="min-height: 300px; width:max-content">
+
 <form name="myForm" method="post" class="pure-form pure-form-stacked">
 	<h1>Registration Form</h1>
 	<div style="color: red; text-transform: uppercase"><?=$formerror?></div>
-	<table width="900">
+	<table>
 		<tr>
 			<td>First Name</td>
-			<td><input type="text" name="firstName" value="<?=$firstName?>" size="50"></td>
+			<td><input type="text" name="firstName" value="<?=$firstName?>" size="30"></td>
 			<td style="color: red;"><?php echo $error_fname?></td>
 		</tr>
 		<tr>
 			<td>Last Name</td>
-			<td><input type="text" name="lastName" value="<?=$lastName?>" size="50"></td>
+			<td><input type="text" name="lastName" value="<?=$lastName?>" size="30"></td>
 			<td style="color: red;"><?php echo $error_lname?></td>
 		</tr>
 		<tr>
 			<td>Email</td>
-			<td><input type="text" name="email" value="<?=$email?>" size="50"></td>
+			<td><input type="text" name="email" value="<?=$email?>" size="30"></td>
 			<td style="color: red;"><?php echo $error_email?></td>
 		</tr>
 		<tr>
 			<td>Password</td>
-			<td><input type="password" name="password" value="<?=$password?>" size="20"></td>
+			<td><input type="password" name="password" value="<?=$password?>" size="30"></td>
 			<td style="color: red;"><?php echo $error_passwd?></td>
 		</tr>
 		<tr>
 			<td>Confirm Password</td>
-			<td><input type="password" name="cpassword" value="<?=$cpassword?>" size="20"></td>
+			<td><input type="password" name="cpassword" value="<?=$cpassword?>" size="30"></td>
 			<td style="color: red;"><?php echo $error_passwd?></td>
 		</tr>
 		<tr>
-			<br>
-			<td><input type="submit" name="submitted" value="Submit"> 
-			<input type="reset" name="reset" value="Reset"></td>
+			<td>
+				<input type="submit" name="submitted" value="Submit" class="pure-button pure-button-primary"> 
+				<input type="reset" name="reset" value="Reset" class="pure-button">
+			</td>
 		</tr>
 	</table>
+	</div>
 </form>
+</div>
+</div>
 
 <?php
 include '../../includes/footer.php';

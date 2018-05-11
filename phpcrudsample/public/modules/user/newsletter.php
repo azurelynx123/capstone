@@ -59,13 +59,14 @@ for ($i=0; $i<sizeof($recipientEmailArray); $i++){
         
         $result = $mail->send();
         $mail->ClearAddresses();
-        echo $result ? 'Pass' : 'Fail';
+        echo $result ? 'Pass<br>' : 'Fail<br>';
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
     }
 }
 unset($_SESSION['recipientId']);
 unset($_SESSION['recipientFullName']);
-?>
 
+?>
+<meta http-equiv="refresh" content="0;URL=/phpcrudsample/public/home.php" />
 <?php include '../../includes/footer.php'; ?>

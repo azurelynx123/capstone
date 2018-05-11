@@ -5,8 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require_once 'includes/autoload.php';
-// include '/../classes/business/UserManager.php';
-// include '/../classes/business/Validation.php';
 include 'includes/header.php';
 require '/includes/PHPMailer/src/Exception.php';
 require '/includes/PHPMailer/src/PHPMailer.php';
@@ -74,28 +72,50 @@ if(isset($_POST["submitted"])){
         }
     }
 }
-
 ?>
-<html>
-<link rel="stylesheet" href=".\css\pure-release-1.0.0\pure-min.css">
-<body>
 
-<h1>Forget Password</h1>
-<form name="myForm" method="post" class="pure-form pure-form-stacked">
-<table border='0' width="100%">
-  <tr>    
-    <td>Email</td>
-    <td><input type="email" name="email" value="<?=$email?>" pattern=".{1,}"   required title="Cannot be empty field" size="30"></td>
-	<td><?php echo $error_email?>
-  </tr> 
-  <tr>
-    <td></td>
-    <td><br><input type="submit" name="submitted" value="Submit" class="pure-button pure-button-primary">
-    </td>
-  </tr>
-  <tr><p style="color:red;"> <?php echo $formerror?></p></tr>
-</table>
-</form>
+<html>
+    <head>
+        <title>Forget Password</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="bs/css/bootstrap.min.css">
+        <script src="bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+    </head>
+    <body style="min-height: 100vh; background-image: url(images/background.jpg); background-repeat: repeat; background-size : 100% auto; background-attachment: fixed">
+
+        <br>
+        <div class="col-lg-4 col-lg-offset-4" style="background-color: rgba(255, 255, 255, 0.8)">
+            <div class="container-fluid" style="min-height: 300px">
+                <h1 style="text-align: center">Forget Password</h1>
+                <br>
+                <p style="text-align: center">Enter the email you registerd with. We will send an email to you with a new account password if we find the account associated with the email entered.<br><br>
+                <center>
+                    <form name="myForm" method="post" class="pure-form pure-form-stacked">
+                        <table border='0' width="100%">
+                        <tr><td><center>Email: <input type="email" name="email" value="<?=$email?>" pattern=".{1,}"   required title="Cannot be empty field" size="30"></center></td></tr>
+                        <tr><td><?php echo $error_email?></td></tr>
+                        <tr><td><br></td><tr>
+                        <tr>
+                            <td><center>
+                                <input type="submit" name="submitted" value="Submit" class="pure-button pure-button-primary">
+                                <span>  </span>
+                                <input type="reset" value="Cancel" class="pure-button pure-button-primary">
+                            </center></td>
+                        </tr>
+                        <tr><p style="color:red;"><?php echo $formerror?></p></tr>
+                        </table>
+                    </form>
+                </center>
+                <br>
+            </div>
+        </div>
+    </body>
+</html>
+
 <?php
 include 'includes/footer.php';
 ?>

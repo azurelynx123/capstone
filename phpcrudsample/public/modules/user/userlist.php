@@ -14,6 +14,18 @@ $UM=new UserManager();
 $users=$UM->getAllUsers();
 
 ?>
+<head>
+    <title>List of Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../bs/css/bootstrap.min.css">
+    <script src="../../bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="min-height: 100vh; background-image: url(../../images/background.jpg); background-repeat: repeat; background-size : 100% auto; background-attachment: fixed">
+<br>
+<div class="container-fluid" style="background-color: rgba(255, 255, 255, 0.8); width: max-content;">
 <br/>
 <form action="searchUser.php" method="get" class="pure-form pure-form-stacked">
 	<table border:"0" width="800">
@@ -31,7 +43,6 @@ if(isset($users)){
     <br/>
     Below is the list of Developers registered in community portal
     <br/>
-    
     <table class="pure-table pure-table-bordered" width="800">
     <tr>
 	<thead>
@@ -60,9 +71,9 @@ if(isset($users)){
             <?php if($_SESSION['role'] == "admin"){ ?>
                 <form method="post" class="pure-form pure-form-stacked">
             <?php if($user->subscribe != false) {  ?>
-                    <td align="center" bgcolor="#FFFFFF"><input name="check[]" type="checkbox" value="<?php echo $user->id; ?>"></td>
+                    <td align="center" bgcolor="#FFFFFF"><input name="check[]" type="checkbox" class="case" value="<?php echo $user->id; ?>"></td>
             <?php } else { ?>
-                    <td></td>
+                <td align="center" bgcolor="#FFFFFF"><input name="check[]" type="checkbox" value="<?php echo $user->id; ?>" disabled></td>
             <?php } ?>
             <?php } ?>
                <td><?=$user->id?></td>
@@ -120,9 +131,7 @@ if(isset($users)){
     }
 }
 ?>
-
-
-
+</div>
 <?php
 include '../../includes/footer.php';
 ?>
