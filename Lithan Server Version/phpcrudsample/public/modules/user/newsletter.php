@@ -28,7 +28,7 @@ $recipientFullNameArray = $_SESSION['recipientFullName'];
 
 $recipientEmailArray = explode(", ", $recipientEmailArray);
 
-$rootLink = "http://localhost/phpcrudsample/public/modules/user/";
+$rootLink = "http://202.73.44.87/students/m1/run8/mnebmnassir/phpcrudsample/public/modules/user/";
 $link = $rootLink."unsubscribe.php?id=";
 $valhas = "";
 
@@ -44,6 +44,13 @@ for ($i=0; $i<sizeof($recipientEmailArray); $i++){
         $valhas = md5($recipientIdArray[$i]);
 
         $mail->isSMTP();
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'mdnurerfan105@gmail.com';
@@ -61,12 +68,12 @@ for ($i=0; $i<sizeof($recipientEmailArray); $i++){
         $mail->ClearAddresses();
         echo $result ? 'Pass<br>' : 'Fail<br>';
     } catch (Exception $e) {
-        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+        echo 'Message could not be sent. Mailer Error: ',$mail->ErrorInfo;
     }
 }
 unset($_SESSION['recipientId']);
 unset($_SESSION['recipientFullName']);
 
 ?>
-<meta http-equiv="refresh" content="0;URL=/phpcrudsample/public/home.php" />
+<meta http-equiv="refresh" content="0;URL=/students/m1/run8/mnebmnassir/phpcrudsample/public/home.php" />
 <?php include '../../includes/footer.php'; ?>
