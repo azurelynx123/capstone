@@ -5,6 +5,11 @@ use classes\data\UserManagerDB;
 use classes\entity\User;
 use classes\util\DBUtil;
 
+// include 'classes/business/UserManager.php';
+// include 'classes/data/UserManagerDB.php';
+// include 'classes/entity/User.php';
+// include 'classes/util/DBUtil.php';
+
 /**
  * UserManagerDB test case.
  */
@@ -67,7 +72,7 @@ class UserManagerDBTest extends PHPUnit_Framework_TestCase
         // TODO Auto-generated UserManagerDBTest::testGetUserByEmailPassword()
         // $this->markTestIncomplete("getUserByEmailPassword test not implemented");
         
-        $user = UserManagerDB::loginPasswordCheck('temporesta@gmail.com', 'Password123');
+        $user = UserManagerDB::loginPasswordCheck('mdnurerfan105@gmail.com', 'Yakitate123');
 
         $this->assertTrue($user);
     }
@@ -160,7 +165,7 @@ class UserManagerDBTest extends PHPUnit_Framework_TestCase
         // $this->markTestIncomplete("getAllUsers test not implemented");
         
         $users = UserManagerDB::getAllUsers();
-        $this->assertEquals(5, sizeof($users)-1);
+        $this->assertEquals(6, sizeof($users));
     }
 
     /**
