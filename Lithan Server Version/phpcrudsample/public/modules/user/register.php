@@ -1,0 +1,124 @@
+<?php
+require_once '../../includes/autoload.php';
+// include '/../../classes/business/UserManager.php';
+// include '/../../classes/business/Validation.php';
+include '../../includes/header.php';
+include '../../includes/password.php';
+
+use classes\util\DBUtil;
+use classes\business\UserManager;
+use classes\business\Validation;
+use classes\entity\User;
+
+$formerror = "";
+
+$firstName = "";
+$lastName = "";
+$email = "";
+$password = "";
+$cpassword = "";
+$error_fname = "";
+$error_lname = "";
+$error_passwd = "";
+$error_email = "";
+$validate = new Validation();
+
+if (isset($_REQUEST["submitted"])) {
+    $firstName = $_REQUEST["firstName"];
+    $lastName = $_REQUEST["lastName"];
+    $email = $_REQUEST["email"];
+    $password = $_REQUEST["password"];
+    $cpassword = $_REQUEST["cpassword"];
+    
+    if ($firstName != '' && $lastName != '' && $email != '' && $password != '' && $cpassword == $password) {
+        if ($validate->check_name($firstName, $error_fname) && $validate->check_name($lastName, $error_lname)) {
+            if ($validate->check_email($email, $error_email)) {
+                if ($validate->check_password($password, $error_passwd)) {
+                    $UM = new UserManager();
+                    $user = new User();
+                    $user->firstName = $firstName;
+                    $user->lastName = $lastName;
+                    $user->email = $email;
+                    $user->password = password_hash($password, PASSWORD_BCRYPT);
+					$user->role = "user";
+					$user->subscribe = 1;
+                    $existuser = $UM->getUserByEmail($email);
+                    
+                    if (! isset($existuser)) {
+                        // Save the Data to Database
+                        $UM->saveUser($user);
+                        echo '<meta http-equiv="Refresh" content="1; url=./registerthankyou.php">';
+                    } else {
+                        $formerror = "User Already Exist";
+                    }
+                }
+            }
+        }
+        
+    } else if ($cpassword != $password) {
+        $formerror = "Passwords don't match each other.";
+    } else {
+        $formerror = "Please fill in the fields";
+    }
+}
+?>
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="..\..\css\pure-release-1.0.0\pure-min.css">
+    <link rel="stylesheet" href="../../bs/css/bootstrap.min.css">
+    <script src="../../bs/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+</head>
+<body style="min-height: 100vh; background-image: url(../../images/background.jpg); background-repeat: repeat; background-size : 100% auto; background-attachment: fixed">
+<br>
+
+<div class="col-lg-4 col-lg-offset-4" style="background-color: rgba(255, 255, 255, 0.8)">
+<div class="container-fluid" style="min-height: 300px; width:max-content">
+
+<form name="myForm" method="post" class="pure-form pure-form-stacked">
+	<h1>Registration Form</h1>
+	<div style="color: red; text-transform: uppercase"><?=$formerror?></div>
+	<table>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="firstName" value="<?=$firstName?>" size="30"></td>
+			<td style="color: red;"><?php echo $error_fname?></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="lastName" value="<?=$lastName?>" size="30"></td>
+			<td style="color: red;"><?php echo $error_lname?></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email" value="<?=$email?>" size="30"></td>
+			<td style="color: red;"><?php echo $error_email?></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password" value="<?=$password?>" size="30"></td>
+			<td style="color: red;"><?php echo $error_passwd?></td>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td><input type="password" name="cpassword" value="<?=$cpassword?>" size="30"></td>
+			<td style="color: red;"><?php echo $error_passwd?></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" name="submitted" value="Submit" class="pure-button pure-button-primary"> 
+				<input type="reset" name="reset" value="Reset" class="pure-button">
+			</td>
+		</tr>
+	</table>
+	</div>
+</form>
+</div>
+</div>
+
+<?php
+include '../../includes/footer.php';
+?>
