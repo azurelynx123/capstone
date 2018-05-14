@@ -99,35 +99,39 @@ if(isset($users)){
 
     <?php
     if(isset($_POST["bulkMail"])){
-        $checkedArray = $_POST["check"];
-        $emailArray = [];
-        $emailNameArray = [];
-        //Array of recipient emails
-        foreach ($checkedArray as $id){
-            array_push($emailArray, $UM->getEmailById($id));
+        if(!isset($_POST["check"])){
+            echo "<script>alert('Please select users to email to.');</script>";
+        } else {
+            $checkedArray = $_POST["check"];
+            $emailArray = [];
+            $emailNameArray = [];
+            //Array of recipient emails
+            foreach ($checkedArray as $id){
+                array_push($emailArray, $UM->getEmailById($id));
+            }
+            //Array of recipient full names
+            foreach ($emailArray as $userEmail){
+                array_push($emailNameArray, $UM->getNameByEmail($userEmail));
+            }
+            $emailString = implode(", ", $emailArray);
+            $_SESSION['recipientId'] = $checkedArray;
+            $_SESSION['recipientFullName'] = $emailNameArray;
+            ?>
+            <form method="post" action="newsletter.php">
+                <table width="800">
+                    <tr>
+                        <td>Recepients</td>
+                        <td><input type="text" name="emailList" value='<?=$emailString?>' size="70%" readonly/></td>
+                    </tr>
+                    <tr>
+                        <td>Content</td>
+                        <td><textarea name="emailContent" style="width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"></textarea></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Send" name ="sendMail" class="pure-button pure-button-primary"/>
+            </form>
+        <?php
         }
-        //Array of recipient full names
-        foreach ($emailArray as $userEmail){
-            array_push($emailNameArray, $UM->getNameByEmail($userEmail));
-        }
-        $emailString = implode(", ", $emailArray);
-        $_SESSION['recipientId'] = $checkedArray;
-        $_SESSION['recipientFullName'] = $emailNameArray;
-        ?>
-        <form method="post" action="newsletter.php">
-            <table width="800">
-                <tr>
-                    <td>Recepients</td>
-                    <td><input type="text" name="emailList" value='<?=$emailString?>' size="70%" readonly/></td>
-                </tr>
-                <tr>
-                    <td>Content</td>
-                    <td><textarea name="emailContent" style="width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;"></textarea></td>
-                </tr>
-            </table>
-            <input type="submit" value="Send" name ="sendMail" class="pure-button pure-button-primary"/>
-        </form>
-    <?php
     }
 }
 ?>
