@@ -107,14 +107,14 @@ class UserManagerDB
 
     }		
     public static function getAllUsers(){
-        $users[]=array();
+        $users=[];
         $conn=DBUtil::getConnection();
         $sql="select * from tb_user";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
                 $user=self::fillUser($row);
-                $users[]=$user;
+                array_push($users, $user);
             }
         }
         $conn->close();
