@@ -25,7 +25,7 @@ class Config
     }
     
     public static function getApplicationRoot(){
-        $path = $_SERVER['DOCUMENT_ROOT'] . "/phpcrudsample";
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/students/m1/run8/mnebmnassir/phpcrudsample";
         return $path;
     }
 }

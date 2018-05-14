@@ -1,7 +1,7 @@
 <?php
 use classes\business\UserManager;
 use classes\business\Validation;
-
+session_start();
 require_once 'includes/autoload.php';
 include 'includes/header.php';
 ?>

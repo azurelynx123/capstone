@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("Location:/phpcrudsample/public/login.php");
+header("Location:/students/m1/run8/mnebmnassir/phpcrudsample/public/login.php");
 ?>
