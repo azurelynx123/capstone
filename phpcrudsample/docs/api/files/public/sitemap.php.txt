@@ -1,0 +1,18 @@
+<?php
+session_start();
+include 'includes/security.php';
+include 'includes/header.php';
+?>
+<br><br>
+<h1>Sitemap</h1>
+<a href="/phpcrudsample/public/home.php">Home</a><br>
+<a href="/phpcrudsample/public/modules/user/updateprofile.php">Update Profile</a><br>
+<a href="/phpcrudsample/public/modules/user/userlist.php">User Listing</a><br>
+<a href="/phpcrudsample/public/aboutus.php">About Us</a><br>
+<a href="/phpcrudsample/public/contactus.php">Contact Us</a><br>
+
+
+<?php
+include 'includes/footer.php';
+?>
+
