@@ -43,11 +43,18 @@ if(isset($_POST["submitted"])){
             $message .='New Password: '.$newpassword[0];
             $message = wordwrap($message, 70);
             $from = 'mdnurerfan105@gmail.com';
-            $fromName = "Md Nur Erfan";
+            $fromName = "Admin";
             
             $mail = new PHPMailer(true);
             try {
                 $mail->isSMTP();
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'mdnurerfan105@gmail.com';
